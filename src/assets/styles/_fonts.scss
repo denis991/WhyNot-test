@@ -1,51 +1,49 @@
 @font-face {
-  font-family: 'Tele2 DisplaySerif Web SHORT';
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-  url('../fonts/Tele2DisplaySerifWebSHORT-Bold.woff2') format('woff2'),
-  url('../fonts/Tele2DisplaySerifWebSHORT-Bold.woff') format('woff'),
-  url('../fonts/Tele2DisplaySerifWebSHORT-Bold.ttf') format('truetype');
+	font-family: 'Tele2  SHORT';
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Tele2DisplaySerifWebSHORT-Bold.woff2') format('woff2'),
+		url('../fonts/Tele2DisplaySerifWebSHORT-Bold.woff') format('woff'),
+		url('../fonts/Tele2DisplaySerifWebSHORT-Bold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Tele2 TextSans Web SHORT';
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  url('../fonts/Tele2TextSansWebSHORT-Regular.woff2') format('woff2'),
-  url('../fonts/Tele2TextSansWebSHORT-Regular.woff') format('woff'),
-  url('../fonts/Tele2TextSansWebSHORT-Regular.ttf') format('truetype');
-}
-
-
-@font-face {
-  font-family: 'Tele2 TextSans Web SHORT';
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  url('../fonts/Tele2TextSansWebSHORT-Regular_1.woff2') format('woff2'),
-  url('../fonts/Tele2TextSansWebSHORT-Regular_1.woff') format('woff'),
-  url('../fonts/Tele2TextSansWebSHORT-Regular_1.ttf') format('truetype');
-}
-
-
-@font-face {
-  font-family: 'Tele2 TextSans Web SHORT';
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-  url('../fonts/Tele2TextSansWebSHORT-Bold.woff2') format('woff2'),
-  url('../fonts/Tele2TextSansWebSHORT-Bold.woff') format('woff'),
-  url('../fonts/Tele2TextSansWebSHORT-Bold.ttf') format('truetype');
+	font-family: 'Tele2';
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Tele2TextSansWebSHORT-Regular.woff2') format('woff2'),
+		url('../fonts/Tele2TextSansWebSHORT-Regular.woff') format('woff'),
+		url('../fonts/Tele2TextSansWebSHORT-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Tele2 TextSans Web SHORT';
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-  url('../fonts/Tele2TextSansWebSHORT-Bold_1.woff2') format('woff2'),
-  url('../fonts/Tele2TextSansWebSHORT-Bold_1.woff') format('woff'),
-  url('../fonts/Tele2TextSansWebSHORT-Bold_1.ttf') format('truetype');
+	font-family: 'Tele2 Regular';
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Tele2TextSansWebSHORT-Regular_1.woff2') format('woff2'),
+		url('../fonts/Tele2TextSansWebSHORT-Regular_1.woff') format('woff'),
+		url('../fonts/Tele2TextSansWebSHORT-Regular_1.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Tele2';
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Tele2TextSansWebSHORT-Bold.woff2') format('woff2'),
+		url('../fonts/Tele2TextSansWebSHORT-Bold.woff') format('woff'),
+		url('../fonts/Tele2TextSansWebSHORT-Bold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Tele2 Bold';
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Tele2TextSansWebSHORT-Bold_1.woff2') format('woff2'),
+		url('../fonts/Tele2TextSansWebSHORT-Bold_1.woff') format('woff'),
+		url('../fonts/Tele2TextSansWebSHORT-Bold_1.ttf') format('truetype');
 }

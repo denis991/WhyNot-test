@@ -44,13 +44,30 @@
 	</div>
 </template>
 
-<script setup >
-import ref from 'vue'
+<script setup>
+import ref from 'vue';
 const isMobile = ref();
-
 </script>
 
 <style scoped lang="scss">
+$gray: #7c8792;
+$black: #1f2229;
+$bold_gray: #959597;
+@mixin trs($var) {
+	transition: $var ease-in-out;
+}
+
+@mixin br($var) {
+	border-radius: $var;
+}
+
+@mixin text-eclipse($var) {
+	display: -webkit-box !important;
+	-webkit-line-clamp: $var;
+	-webkit-box-orient: vertical !important;
+	text-overflow: ellipsis !important;
+}
+
 .navbar {
 	&-bg {
 		background: $black;
@@ -58,7 +75,7 @@ const isMobile = ref();
 
 	.geo-bottom {
 		display: none;
-		@media #{$lg} {
+		@media (max-width: 1000px) {
 			padding: 16px;
 			display: flex;
 			align-items: center;
@@ -89,7 +106,7 @@ const isMobile = ref();
 
 			.notify {
 				margin: 5px 0 0 32px;
-				@media #{$lg} {
+				@media (max-width: 1000px) {
 					margin: 5px 32px 0;
 				}
 			}
@@ -100,13 +117,14 @@ const isMobile = ref();
 				line-height: 18px;
 				display: flex;
 				align-items: center;
-				@media #{$lg} {
+				@media (max-width: 1000px) {
 					display: none;
 				}
 
 				.icon {
 					margin: 0 9px 0 0;
-					filter: invert(55%) sepia(18%) saturate(249%) hue-rotate(169deg) brightness(91%) contrast(90%);
+					filter: invert(55%) sepia(18%) saturate(249%) hue-rotate(169deg) brightness(91%)
+						contrast(90%);
 				}
 			}
 
@@ -117,7 +135,7 @@ const isMobile = ref();
 				height: 14px;
 				display: none;
 
-				@media #{$lg} {
+				@media (max-width: 1000px) {
 					display: flex;
 					align-items: center;
 				}
@@ -126,10 +144,10 @@ const isMobile = ref();
 					display: block;
 					width: 18px;
 					height: 2px;
-					.br(5px);
+					@include br(5px);
 					background: #fff;
 					content: '';
-					.trs(0.3s);
+					@include trs(0.3s);
 				}
 
 				span::before {
@@ -154,18 +172,18 @@ const isMobile = ref();
 
 			.active {
 				span {
-					.trs(0.3s);
+					@include trs(0.3s);
 					transform: rotate(311deg);
 				}
 
 				span::before {
-					.trs(0.3s);
+					@include trs(0.3s);
 					height: 0;
 				}
 
 				span::after {
 					transform: rotate(276deg);
-					.trs(0.3s);
+					@include trs(0.3s);
 				}
 			}
 		}
@@ -176,7 +194,7 @@ const isMobile = ref();
 		align-items: center;
 		padding: 15px 0 0;
 		border-bottom: 1px solid $gray;
-		@media #{$lg} {
+		@media (max-width: 1000px) {
 			flex-direction: column;
 			border-bottom: none;
 			padding: 24px 0 12px;
@@ -193,10 +211,10 @@ const isMobile = ref();
 			line-height: 18px;
 			padding: 0 0 12px;
 			margin: 0 0 0 18px;
-			@media #{$xl} {
+			@media (max-width: 1200px) {
 				margin: 0 0 0 14px;
 			}
-			@media #{$lg} {
+			@media (max-width: 1000px) {
 				flex-direction: column;
 				border-bottom: 1px solid $gray;
 				padding: 0 0 8px 0;
@@ -210,7 +228,7 @@ const isMobile = ref();
 
 		&-item:first-child {
 			margin: 0;
-			@media #{$lg} {
+			@media (max-width: 1000px) {
 				margin: 0;
 			}
 		}
@@ -233,7 +251,7 @@ const isMobile = ref();
 	.navbar-menu {
 		height: 100%;
 		opacity: 1;
-		.trs(0.3s);
+		@include trs(0.3s);
 	}
 }
 </style>
