@@ -1,0 +1,54 @@
+// @import "normalize/normalize.css";
+@import '~normalize.css';
+@import "_var";
+@import "_mixins";
+@import "_fonts";
+
+html {
+  font-size: 16px;
+  font-family: "Tele2 TextSans Web SHORT Regular", sans-serif !important;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 0 7vw;
+
+  @media @xxl {
+    padding: 0 5vw;
+  }
+
+  @media @lg {
+    padding: 0 1.3em;
+  }
+
+  @media @md {
+    padding: 0 1em;
+  }
+
+  @media @sm {
+    padding: 0 0.5em;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
