@@ -3,20 +3,21 @@
 		<div class="navbar-bg">
 			<div class="container">
 				<div class="navbar-header">
-					<a href="/" class="navbar-header-logo"><img src="/images/Logo.svg" alt="logo" /></a>
+					<router-link to="/" class="navbar-header-logo">
+						<img src="/images/Logo.svg" alt="logo" />
+					</router-link>
 					<div class="navbar-header-actions">
 						<div class="geo">
-							<div class="icon"><img src="/images/Geo.svg" alt="logo" /></div>
+							<div class="icon">
+								<img src="/images/Geo.svg" alt="logo" />
+
+              </div>
 							Москва и область
 						</div>
 						<div class="notify">
 							<img src="/images/Notification-Bell.svg" alt="logo" />
 						</div>
-						<div
-							class="hamburger"
-							:class="{ active: isMobile }"
-							@click.stop="isMobile ? (isMobile = false) : (isMobile = true)"
-						>
+						<div class="hamburger" :class="{ active: isMobile }" @click.stop="isMobile = !isMobile">
 							<span></span>
 						</div>
 					</div>
@@ -32,34 +33,96 @@
 					:key="item.id"
 					:to="item.Path"
 					@click.stop="isMobile = false"
-					@mouseover="showSubItems(item)"
-					@mouseout="hideSubItems(item)"
+					@click="isMenuOpen = false"
 				>
 					{{ item.Title }}
 					<ul v-if="item.SubItems" :class="['sub-menu', 'sub-menu-' + item.id]">
-						<li v-for="subItem in item.SubItems" :key="subItem.advancedPath">
-							<a :href="subItem.advancedPath">{{ subItem.text }}</a>
+						<li
+							v-for="subItem in item.SubItems"
+							:key="subItem.advancedPath"
+							:class="['sub-menu-li', subItem.advancedPath.slice(1)]"
+						>
+							<!-- <router-link
+								:to="item.Path + subItem.advancedPath"
+								:href="item.Path + subItem.advancedPath"
+							> -->
+							<router-link
+								:to="generatePath(item.Path, subItem.advancedPath)"
+								:href="generatePath(item.Path, subItem.advancedPath)"
+							>
+								{{ subItem.text }}
+							</router-link>
 						</li>
 					</ul>
 				</router-link>
 			</div>
 		</div>
 		<div class="geo geo-bottom" v-show="isMobile">
-			<div class="icon"><img src="/images/Geo.svg" alt="logo" /></div>
+			<div class="icon">
+				<img src="/images/Geo.svg" alt="logo" />
+			</div>
 			Москва и область
 		</div>
 	</div>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue';
-const isMobile = ref();
 import { useMain } from '../store/main.js';
+export default {
+	name: 'Navigation',
 
-const mainStore = useMain();
+	data() {
+		return {
+			isMenuOpen: false,
+			isHoverLocked: false,
+			hoverTimer: null,
+			// ... other data properties
+			isMobile: ref(),
+			// mainStore: useMain(),
 
-const Navigation = mainStore.state.Navigation;
-// console.log('Navigation: ', ...Navigation);
+			Navigation: useMain().state.Navigation,
+			activeSubMenu: ref(null),
+			isMenuOpen: ref(false),
+		};
+	},
+	methods: {
+		generatePath(itemPath, advancedPath) {
+			if (itemPath === '/') {
+				return advancedPath;
+			} else {
+				return itemPath + advancedPath;
+			}
+		},
+		handleHover() {
+			if (this.isHoverLocked) {
+				return;
+			}
+			this.isMenuOpen = true;
+			this.isHoverLocked = true;
+			this.hoverTimer = setTimeout(() => {
+				this.isHoverLocked = false;
+			}, 1000);
+		},
+		handleMouseLeave() {
+			clearTimeout(this.hoverTimer);
+			this.isHoverLocked = false;
+		},
+		// ... other methods
+		handleNavigation(item) {
+			// Проверяем, содержит ли элемент ссылку (advancedPath)
+			if (item.advancedPath) {
+				// Выполняем переход по адресу
+				mainStore.router.push(item.advancedPath);
+			} else {
+				// Или выполняем обычную навигацию
+				mainStore.router.push(item.Path);
+			}
+			// Закрытие мобильного меню после перехода
+			isMobile.value = false;
+		},
+	},
+};
 </script>
 
 <style scoped lang="scss">
@@ -243,9 +306,17 @@ $bold_gray: #959597;
 			}
 			// position: relative;
 
-			// &:hover .sub-menu {
-			// 	display: block;
-			// }
+			.sub-menu {
+				visibility: hidden;
+				opacity: 0;
+				z-index: -1;
+				position: absolute;
+			}
+			&:hover .sub-menu {
+				visibility: visible;
+				opacity: 1;
+				z-index: 1;
+			}
 		}
 
 		&-item:first-child {
@@ -277,46 +348,66 @@ $bold_gray: #959597;
 		opacity: 1;
 		@include trs(0.3s);
 	}
-
 	.sub-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #000;
-  padding: 10px;
-  min-width: 150px;
-  z-index: 10;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+		display: none;
 
-  li {
-    // Стили для пунктов подменю
-    color: #888;
-    font-size: 14px;
-    line-height: 18px;
-    padding: 6px 0;
+		top: 100%;
+		left: 0;
+		visibility: hidden;
+		opacity: 0;
+		z-index: -1;
+		position: absolute;
+	}
+}
 
-    &:last-child {
-      padding-bottom: 0;
-    }
+.sub-menu {
+	display: none;
+	position: absolute;
+	// top: 100%;
+	// left: 0;
 
-    a {
-      color: #fff;
-      text-decoration: none;
+	padding: 10px;
+	min-width: 150px;
+	z-index: 10;
+	opacity: 0;
+	transform: translateY(-10px);
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	@include br(5px); // Apply border-radius mixin for rounded corners
 
-      &:hover {
-        // Стили при наведении на ссылку в подменю
-      }
-    }
-  }
+	background: #1f2229;
+
+	border: 1px solid $gray; // Серая рамка
+	border-radius: 5px; // Закругленные углы
+	text-align: center; // Выравнивание текста по центру
+	border-radius: 19px;
+	// background: linear-gradient(145deg, #cacaca, #f0f0f0);
+	box-shadow: 25px 25px 50px #8f8f8f, -25px -25px 50px #ffffff;
+	li {
+		list-style-type: none;
+		// Стили для пунктов подменю
+		color: white;
+		font-size: 14px;
+		line-height: 18px;
+		padding: 6px 0;
+
+		&:last-child {
+			padding-bottom: 0;
+		}
+
+		a {
+			color: white;
+			text-decoration: none;
+
+			&:hover {
+				// Стили при наведении на ссылку в подменю
+			}
+		}
+	}
 }
 
 .navbar-menu-item:hover .sub-menu {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
+	display: block;
+	opacity: 1;
+	transform: translateY(0);
 }
 </style>
