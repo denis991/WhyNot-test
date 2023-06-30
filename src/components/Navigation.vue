@@ -26,14 +26,21 @@
 		<div class="container">
 			<div class="navbar-menu">
 				<router-link
-					:exact-active-class="'active-link '"
+					:exact-active-class="'active-link'"
 					class="navbar-menu-item"
-					:to="item.Path"
 					v-for="item in Navigation"
 					:key="item.id"
+					:to="item.Path"
 					@click.stop="isMobile = false"
+					@mouseover="showSubItems(item)"
+					@mouseout="hideSubItems(item)"
 				>
 					{{ item.Title }}
+					<ul v-if="item.SubItems" :class="['sub-menu', 'sub-menu-' + item.id]">
+						<li v-for="subItem in item.SubItems" :key="subItem.advancedPath">
+							<a :href="subItem.advancedPath">{{ subItem.text }}</a>
+						</li>
+					</ul>
 				</router-link>
 			</div>
 		</div>
@@ -45,8 +52,14 @@
 </template>
 
 <script setup>
-import ref from 'vue';
+import { ref } from 'vue';
 const isMobile = ref();
+import { useMain } from '../store/main.js';
+
+const mainStore = useMain();
+
+const Navigation = mainStore.state.Navigation;
+// console.log('Navigation: ', ...Navigation);
 </script>
 
 <style scoped lang="scss">
@@ -91,6 +104,8 @@ $bold_gray: #959597;
 	}
 
 	&-header {
+		max-width: 1116px;
+		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -172,8 +187,8 @@ $bold_gray: #959597;
 
 			.active {
 				span {
-					@include trs(0.3s);
-					transform: rotate(311deg);
+					@include trs(0.5s);
+					transform: rotate(140deg);
 				}
 
 				span::before {
@@ -182,16 +197,18 @@ $bold_gray: #959597;
 				}
 
 				span::after {
-					transform: rotate(276deg);
-					@include trs(0.3s);
+					transform: rotate(88deg);
+					@include trs(0.5s);
 				}
 			}
 		}
 	}
 
 	&-menu {
+		margin: 0 auto;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		padding: 15px 0 0;
 		border-bottom: 1px solid $gray;
 		@media (max-width: 1000px) {
@@ -224,6 +241,11 @@ $bold_gray: #959597;
 				font-size: 16px;
 				line-height: 22px;
 			}
+			// position: relative;
+
+			// &:hover .sub-menu {
+			// 	display: block;
+			// }
 		}
 
 		&-item:first-child {
@@ -249,9 +271,52 @@ $bold_gray: #959597;
 	z-index: 999;
 
 	.navbar-menu {
+		max-width: 120vw;
+		margin: 0 auto;
 		height: 100%;
 		opacity: 1;
 		@include trs(0.3s);
 	}
+
+	.sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #000;
+  padding: 10px;
+  min-width: 150px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  li {
+    // Стили для пунктов подменю
+    color: #888;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 6px 0;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        // Стили при наведении на ссылку в подменю
+      }
+    }
+  }
+}
+
+.navbar-menu-item:hover .sub-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
 }
 </style>

@@ -1,16 +1,16 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { resolve } from 'path';
+import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: 3000
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src')
     }
   },
   plugins: [
@@ -18,6 +18,21 @@ export default defineConfig({
     Components({
       dirs: ['./src/components'],
       dts: true
+    }),
+    AutoImport({
+      dts: true,
+      vueTemplate: true,
+      dirs: [
+        './src/store',
+        './src/types',
+        './src/router',
+        './src/composables'
+      ],
+      imports: [
+        'vue',
+        '@vueuse/core',
+        'vue-router'
+      ]
     })
   ],
   css: {

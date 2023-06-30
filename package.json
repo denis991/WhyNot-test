@@ -17,12 +17,13 @@
     "@vueuse/core": "^10.0.2",
     "eslint": "^8.42.0",
     "eslint-plugin-vue": "^9.14.1",
+    "node-sass": "^9.0.0",
     "normalize.css": "^8.0.1",
     "sass": "^1.63.6",
     "scss": "^0.2.4",
-    "vite": "^4.3.9",
     "unplugin-auto-import": "^0.16.4",
     "unplugin-vue-components": "^0.25.1",
+    "vite": "^4.3.9",
     "vue": "^3.2.36"
   }
 }

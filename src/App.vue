@@ -13,10 +13,11 @@
 
 <script>
 
-import Navigation from '@/components/Navigation.vue';
+import Navigation from './components/Navigation.vue';
 import { RouterLink, RouterView } from 'vue-router';
 
 export default {
+  name: 'App',
   components: {
     Navigation
   }

@@ -1,41 +1,114 @@
-export const useMain = defineStore('main', {
-	state() {
-		return {
-			isError: false,
-			Navigation: [
-				{
-					id: 1,
-					Title: 'Преимущества Tele2',
-					Path: '/',
-				},
-				{
-					id: 2,
-					Title: 'Тарифы',
-					Path: '/about',
-				},
-				{
-					id: 3,
-					Title: 'Акции и спецпредложения',
-					Path: '/special',
-				},
-				{
-					id: 4,
-					Title: 'Промотариф Tele2',
-					Path: '/promo',
-				},
-				{
-					id: 5,
-					Title: 'Технология eSIM',
-					Path: '/esim',
-				},
-				{
-					id: 6,
-					Title: 'Подключение нового абонента',
-					Path: '/new',
-				},
+const state = {
+
+	Navigation: [
+		{
+			id: 1,
+			Title: 'Преимущества Tele2',
+			Path: '/',
+			SubItems: [
+				{ text: 'Широкий охват сети', advancedPath: '#wideNetworkCoverage' },
+				{ text: 'Простота использования', advancedPath: '#easeOfUse' },
+				{ text: 'Конкурентные тарифы', advancedPath: '#competitiveRates' },
+				{ text: 'Безлимитные пакеты услуг', advancedPath: '#unlimitedServicePackages' },
+				{ text: 'Гибкие условия тарифа', advancedPath: '#flexiblePlanConditions' },
+				{ text: 'Качественное обслуживание', advancedPath: '#qualityCustomerService' },
+				{ text: 'Бесплатные дополнительные услуги', advancedPath: '#freeAdditionalServices' },
+				{ text: 'Удобные способы пополнения', advancedPath: '#convenientTopUpMethods' },
+				{ text: 'Возможность перенести номер', advancedPath: '#numberPortability' },
+				{ text: 'Инновационные технологии', advancedPath: '#innovativeTechnologies' },
 			],
-		};
-	},
-	getters: {},
-	actions: {},
-});
+		},
+		{
+			id: 2,
+			Title: 'Тарифы',
+			Path: '/tariffs',
+			SubItems: [
+				{ text: 'Всё включено', advancedPath: '#allInclusive' },
+				{ text: 'Безлимитный интернет', advancedPath: '#unlimitedInternet' },
+				{ text: 'Безлимитные звонки', advancedPath: '#unlimitedCalls' },
+				{ text: 'Экономные тарифы', advancedPath: '#economicalRates' },
+				{ text: 'Интернет для устройств', advancedPath: '#internetForDevices' },
+				{ text: 'Международная связь', advancedPath: '#internationalConnectivity' },
+				{ text: 'Пакеты услуг', advancedPath: '#servicePackages' },
+				{ text: 'Корпоративные тарифы', advancedPath: '#corporateRates' },
+				{ text: 'Тарифы для путешествий', advancedPath: '#travelRates' },
+				{ text: 'Тарифы для молодежи', advancedPath: '#youthRates' },
+			],
+		},
+		{
+			id: 3,
+			Title: 'Акции и спецпредложения',
+			Path: '/promotions',
+			SubItems: [
+				{ text: 'Бонус за пополнение', advancedPath: '#topUpBonus' },
+				{ text: 'Скидки на тарифы', advancedPath: '#rateDiscounts' },
+				{ text: 'Подарки при покупке', advancedPath: '#giftsWithPurchase' },
+				{ text: 'Программа лояльности', advancedPath: '#loyaltyProgram' },
+				{ text: 'Акции на сервисы', advancedPath: '#servicePromotions' },
+				{ text: 'Розыгрыши и конкурсы', advancedPath: '#giveawaysContests' },
+				{ text: 'Предложения для новых абонентов', advancedPath: '#newSubscriberOffers' },
+				{ text: 'Пакеты услуг в подарок', advancedPath: '#servicePackagesGift' },
+				{ text: 'Дополнительные услуги со скидкой', advancedPath: '#discountedAdditionalServices' },
+				{ text: 'Предложения для определенных категорий клиентов', advancedPath: '#specialOffers' },
+			],
+		},
+		{
+			id: 4,
+			Title: 'Промотариф Tele2',
+			Path: '/promo-tariff',
+			SubItems: [
+				{ text: 'Бесплатные звонки внутри сети Tele2', advancedPath: '#freeCallsTele2' },
+				{ text: 'Выгодные тарифы на интернет', advancedPath: '#beneficialInternetRates' },
+				{ text: 'Безлимитные сообщения', advancedPath: '#unlimitedMessages' },
+				{ text: 'Гибкая настройка тарифа', advancedPath: '#flexiblePlanCustomization' },
+				{ text: 'Привилегии для лояльных абонентов', advancedPath: '#loyalSubscriberPrivileges' },
+				{ text: 'Условия для молодежи', advancedPath: '#youthBenefits' },
+				{ text: 'Бесплатные услуги при подключении', advancedPath: '#freeServicesActivation' },
+				{ text: 'Быстрое подключение и активация', advancedPath: '#fastActivation' },
+				{ text: 'Круглосуточная поддержка', advancedPath: '#roundTheClockSupport' },
+				{ text: 'Гарантия качества связи', advancedPath: '#connectivityQuality' },
+			],
+		},
+		{
+			id: 5,
+			Title: 'Технология eSIM',
+			Path: '/esim',
+			SubItems: [
+				{ text: 'Виртуальная SIM-карта', advancedPath: '#virtualSimCard' },
+				{ text: 'Удобство и гибкость', advancedPath: '#convenienceFlexibility' },
+				{ text: 'Мгновенная активация', advancedPath: '#instantActivation' },
+				{ text: 'Глобальное покрытие', advancedPath: '#globalCoverage' },
+				{ text: 'Управление несколькими номерами', advancedPath: '#multipleNumberManagement' },
+				{ text: 'Безопасность и надежность', advancedPath: '#securityReliability' },
+				{ text: 'Совместимость с различными устройствами', advancedPath: '#deviceCompatibility' },
+				{ text: 'Удобное переключение между операторами', advancedPath: '#seamlessSwitching' },
+				{ text: 'Экономия места', advancedPath: '#spaceSavings' },
+				{ text: 'Быстрый доступ к услугам связи', advancedPath: '#quickServiceAccess' },
+			],
+		},
+		{
+			id: 6,
+			Title: 'Подключение нового абонента',
+			Path: '/new-subscriber',
+			SubItems: [
+				{ text: 'Выбор тарифного плана', advancedPath: '#tariffSelection' },
+				{ text: 'Регистрация нового номера', advancedPath: '#newNumberRegistration' },
+				{ text: 'Получение SIM-карты', advancedPath: '#simCardAcquisition' },
+				{ text: 'Активация SIM-карты', advancedPath: '#simCardActivation' },
+				{ text: 'Настройка устройства', advancedPath: '#deviceConfiguration' },
+				{ text: 'Перенос номера', advancedPath: '#numberPorting' },
+				{ text: 'Пополнение баланса', advancedPath: '#balanceRecharge' },
+				{ text: 'Дополнительные услуги', advancedPath: '#additionalServices' },
+				{ text: 'Поддержка клиентов', advancedPath: '#customerSupport' },
+				{ text: 'Персонализация аккаунта', advancedPath: '#accountPersonalization' },
+			],
+		},
+	],
+	isError: false,
+};
+
+export function useMain() {
+	return {
+		state,
+	};
+}
